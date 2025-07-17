@@ -1,0 +1,157 @@
+2025-07-17 01:14:33,311 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 01:15:17,797 - app.main - INFO - Processing query: string...
+2025-07-17 01:15:19,673 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 01:15:19,695 - app.main - INFO - Query processed successfully for session: string
+2025-07-17 01:17:15,849 - app.main - INFO - Processing query: string...
+2025-07-17 01:17:17,530 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 01:17:17,551 - app.main - INFO - Query processed successfully for session: string
+2025-07-17 01:18:25,136 - app.main - INFO - Processing query: string...
+2025-07-17 01:21:10,703 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 01:21:31,364 - app.main - INFO - Query processed successfully for session: string
+2025-07-17 01:22:13,773 - app.main - INFO - Processing query: Hi Tell me about RAG...
+2025-07-17 01:22:31,586 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 01:22:31,590 - app.main - INFO - Query processed successfully for session: string
+2025-07-17 01:26:46,008 - app.main - INFO - Uploading document: 35351-Article Text-39418-1-2-20250410.pdf
+2025-07-17 01:27:34,593 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 01:27:35,055 - app.retrieval.vector_store - INFO - FAISS index saved successfully
+2025-07-17 01:27:35,056 - app.retrieval.vector_store - INFO - Added 15 chunks to vector store
+2025-07-17 01:28:00,350 - app.main - INFO - Document 35351-Article Text-39418-1-2-20250410.pdf processed and indexed successfully
+2025-07-17 01:29:47,266 - app.main - INFO - Processing query: Give me Introduction...
+2025-07-17 01:33:38,376 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 01:33:38,383 - app.main - INFO - Query processed successfully for session: string
+2025-07-17 01:34:52,555 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 09:48:13,987 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 09:48:14,497 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 09:48:14,558 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 11:48:01,428 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 11:48:01,963 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 11:48:01,978 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 12:22:51,610 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 12:23:00,202 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 12:23:00,706 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 12:23:00,720 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 12:27:51,362 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 12:27:51,951 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 12:27:51,980 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 12:28:33,748 - app.ingestion.document_processor - ERROR - Document processing failed: 'dict' object has no attribute 'encode'
+2025-07-17 12:28:33,748 - app.main - ERROR - Document ingestion failed: 
+2025-07-17 14:03:05,320 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:03:07,780 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:03:07,884 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:03:55,888 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:03:56,677 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 0 chunks
+2025-07-17 14:03:56,895 - app.retrieval.advanced_vector_store - INFO - Vector store saved successfully
+2025-07-17 14:03:56,896 - app.retrieval.advanced_vector_store - INFO - Added 15 chunks to vector store
+2025-07-17 14:10:53,168 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:10:53,575 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 15 chunks
+2025-07-17 14:10:54,153 - app.retrieval.advanced_vector_store - INFO - Vector store saved successfully
+2025-07-17 14:10:54,154 - app.retrieval.advanced_vector_store - INFO - Added 31 chunks to vector store
+2025-07-17 14:14:00,259 - app.main - ERROR - Complete RAG pipeline failed: 'query'
+2025-07-17 14:18:24,479 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:18:24,631 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 46 chunks
+2025-07-17 14:21:23,200 - app.main - ERROR - Complete RAG pipeline failed: 'model'
+2025-07-17 14:21:31,015 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:21:31,073 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 46 chunks
+2025-07-17 14:24:06,282 - app.main - ERROR - Complete RAG pipeline failed: 'model'
+2025-07-17 14:24:19,595 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:24:19,762 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 46 chunks
+2025-07-17 14:24:42,942 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 14:32:37,386 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 14:32:49,193 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:32:50,004 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:32:50,034 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:33:30,025 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 14:33:41,084 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:33:41,855 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:33:41,898 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:34:50,265 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 14:35:01,715 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:35:04,268 - app.retrieval.vector_store - INFO - Loaded FAISS index with 15 vectors
+2025-07-17 14:35:04,372 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:35:47,681 - app.main - INFO - Uploading document: LLM Benchmarks-1.pdf
+2025-07-17 14:35:57,780 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:35:58,926 - app.retrieval.vector_store - INFO - FAISS index saved successfully
+2025-07-17 14:35:58,928 - app.retrieval.vector_store - INFO - Added 31 chunks to vector store
+2025-07-17 14:35:58,929 - app.main - INFO - Document LLM Benchmarks-1.pdf processed and indexed successfully
+2025-07-17 14:37:10,468 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:38:31,528 - app.main - INFO - Processing query: Explain MMLU...
+2025-07-17 14:38:47,647 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:38:55,528 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 14:38:55,541 - app.main - INFO - Query processed successfully for session: bb378159-eac5-4916-a5f8-96c5d004cf59
+2025-07-17 14:44:51,547 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 14:45:05,991 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:45:08,896 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:45:09,016 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:45:40,076 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:45:40,968 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:45:41,009 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:46:36,711 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 14:46:47,208 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:46:48,006 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:46:48,036 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:49:13,783 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:49:14,603 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 14:49:14,638 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 14:50:07,500 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:50:08,690 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 46 chunks
+2025-07-17 14:50:11,719 - app.retrieval.advanced_vector_store - INFO - Vector store saved successfully
+2025-07-17 14:50:11,720 - app.retrieval.advanced_vector_store - INFO - Added 31 chunks to vector store
+2025-07-17 14:50:45,673 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 14:50:45,901 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 14:50:54,753 - app.main - ERROR - Complete RAG pipeline failed: 'model'
+2025-07-17 16:26:37,490 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 16:26:46,209 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 16:26:46,821 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 16:26:46,843 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 16:30:19,838 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 16:30:20,335 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 16:30:20,362 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 16:32:14,099 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 16:32:14,176 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 16:32:46,445 - app.main - ERROR - Complete RAG pipeline failed: 'model'
+2025-07-17 16:34:28,545 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 16:34:28,592 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 16:35:29,502 - app.main - ERROR - Complete RAG pipeline failed: 'model'
+2025-07-17 16:35:41,018 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 16:35:41,082 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 16:36:58,276 - app.main - ERROR - Complete RAG pipeline failed: 'model'
+2025-07-17 16:38:47,939 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 16:38:48,552 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 16:38:48,586 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 16:39:32,214 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 16:39:32,292 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 16:43:20,191 - app.main - ERROR - Complete RAG pipeline failed: 'model'
+2025-07-17 17:11:53,324 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:11:53,973 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:11:53,998 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 17:13:16,825 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 17:13:58,088 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:13:58,672 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:13:58,704 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 17:15:30,755 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 17:15:30,971 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 17:25:31,673 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:25:32,516 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:25:32,563 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 17:26:44,432 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 17:26:44,529 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 17:27:01,638 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 17:32:17,315 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:32:18,093 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 17:32:18,130 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-17 17:33:19,795 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 17:33:20,017 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 17:33:40,380 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 17:35:20,938 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 17:35:21,160 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 17:36:55,353 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 17:37:35,592 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 17:40:26,294 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 17:40:30,186 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 17:40:30,398 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 17:54:54,966 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-17 17:54:58,943 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-17 17:54:59,155 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-17 21:17:50,307 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-17 21:18:01,736 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-17 21:18:02,448 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
