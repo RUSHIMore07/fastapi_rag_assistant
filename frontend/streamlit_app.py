@@ -8,6 +8,8 @@ import uuid
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from frontend.components.enhanced_voice_chat import render_enhanced_voice_chat
+from frontend.components.voice_chat import render_voice_chat
 from frontend.utils.api_client import APIClient
 from frontend.components.sidebar import render_sidebar
 from frontend.components.document_upload import render_document_upload
@@ -101,34 +103,77 @@ def main():
     # # ... rest of existing tabs ...
 
 
+    # tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+    #         "💬 RAG Chat", 
+    #         "🎤 Voice Chat",  # New tab
+    #         "📄 Document Upload", 
+    #         "🔍 Advanced Search", 
+    #         "🔧 Query Refinement", 
+    #         "📊 Analytics",
+    #         "⚙️ System"
+    #     ])
+        
+    # with tab1:
+    #         render_enhanced_chat(api_client, config)
+        
+    # with tab2:
+    #         render_voice_chat(api_client, config)  # New voice chat
+        
+    # with tab3:
+    #         render_document_upload(api_client)
 
 
-    # Main interface tabs
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-        "💬 RAG Chat", 
-        "📄 Document Upload", 
-        "🔍 Advanced Search", 
-        "🔧 Query Refinement", 
-        "📊 Analytics",
-        "⚙️ System"
-    ])
-    
+
+
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7,tab8 = st.tabs([
+            "💬 RAG Chat", 
+            "🎤 Voice Chat",
+            "🎙️ Enhanced Voice Chat",  # New enhanced tab
+            "📄 Document Upload", 
+            "🔍 Advanced Search", 
+            "🔧 Query Refinement", 
+            "📊 Analytics",
+            "⚙️ System"
+        ])
+        
     with tab1:
         render_enhanced_chat(api_client, config)
     
     with tab2:
-        render_document_upload(api_client)
+        render_voice_chat(api_client, config)
     
     with tab3:
-        render_advanced_search(api_client)
+        render_enhanced_voice_chat(api_client, config)  # New enhanced voice chat
     
     with tab4:
-        render_query_refinement(api_client)
+        render_document_upload(api_client)
+
+    # # Main interface tabs
+    # tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    #     "💬 RAG Chat", 
+    #     "📄 Document Upload", 
+    #     "🔍 Advanced Search", 
+    #     "🔧 Query Refinement", 
+    #     "📊 Analytics",
+    #     "⚙️ System"
+    # ])
+    
+    # with tab1:
+    #     render_enhanced_chat(api_client, config)
+    
+    # with tab2:
+    #     render_document_upload(api_client)
     
     with tab5:
-        render_analytics(api_client)
+        render_advanced_search(api_client)
     
     with tab6:
+        render_query_refinement(api_client)
+    
+    with tab7:
+        render_analytics(api_client)
+    
+    with tab8:
         render_system_info(api_client)
 
 def render_system_info(api_client):

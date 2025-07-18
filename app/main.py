@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -737,6 +738,220 @@ async def complete_rag_pipeline(request: Dict[str, Any]):
 
 
 
+
+# Add these imports at the top
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from app.voice.google_voice_service import GoogleVoiceService
+from app.models.schemas import VoiceRequest, VoiceResponse, SpeechToTextRequest, SpeechToTextResponse
+
+# Initialize voice service
+voice_service = GoogleVoiceService()
+
+# Add these endpoints to your existing main.py
+
+@app.post("/api/v1/text-to-speech", response_model=Dict[str, Any])
+async def text_to_speech(request: VoiceRequest):
+    """Convert text to speech using Google Cloud TTS"""
+    try:
+        result = await voice_service.text_to_speech(
+            text=request.text,
+            language_code=request.language_code,
+            voice_name=request.voice_name,
+            voice_gender=request.voice_gender,
+            speaking_rate=request.speaking_rate,
+            pitch=request.pitch,
+            audio_encoding=request.audio_encoding
+        )
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Text-to-speech endpoint error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/v1/speech-to-text", response_model=Dict[str, Any])
+async def speech_to_text(
+    file: UploadFile = File(...),
+    language_code: str = Form("en-US"),
+    audio_encoding: str = Form("WEBM_OPUS"),
+    sample_rate: int = Form(16000)
+):
+    """Convert speech to text using Google Cloud Speech-to-Text"""
+    try:
+        # Read audio file
+        audio_data = await file.read()
+        
+        # Convert to text
+        result = await voice_service.speech_to_text(
+            audio_data=audio_data,
+            language_code=language_code,
+            audio_encoding=audio_encoding,
+            sample_rate=sample_rate
+        )
+        
+        return result
+        
+    except Exception as e:
+        logger.error(f"Speech-to-text endpoint error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/v1/voices", response_model=Dict[str, Any])
+async def get_available_voices(language_code: str = None):
+    """Get available voices"""
+    try:
+        voices = voice_service.get_available_voices(language_code)
+        supported_languages = voice_service.get_supported_languages()
+        
+        return {
+            "success": True,
+            "voices": voices,
+            "supported_languages": supported_languages,
+            "total_voices": len(voices)
+        }
+        
+    except Exception as e:
+        logger.error(f"Get voices error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+from app.models.schemas import QueryResponse, VoiceRequest  # import your models
+
+
+
+@app.post("/api/v1/rag-with-voice", response_model=Dict[str, Any])
+async def rag_with_voice(request: Dict[str, Any]):
+    """Complete RAG pipeline with voice response"""
+    try:
+        # 1️⃣ Run the RAG pipeline
+        rag_result: QueryResponse = await complete_rag_pipeline(request)
+        
+        # 2️⃣ Decide whether to create TTS output
+        generate_voice = request.get("generate_voice", False)
+        if generate_voice and rag_result.response:
+            voice_request = VoiceRequest(
+                text=rag_result.response,
+                language_code=request.get("voice_language", "en-US"),
+                voice_name=request.get("voice_name"),
+                # voice_name=request.get("voice_name", "en-US-Wavenet-D"),
+                voice_gender=request.get("voice_gender", "NEUTRAL"),
+                speaking_rate=request.get("speaking_rate", 1.0),
+                pitch=request.get("pitch", 0.0),
+                audio_encoding=request.get("audio_encoding", "MP3")
+            )
+            
+            voice_result = await voice_service.text_to_speech(
+                text=voice_request.text,
+                language_code=voice_request.language_code,
+                voice_name=voice_request.voice_name,
+                voice_gender=voice_request.voice_gender,
+                speaking_rate=voice_request.speaking_rate,
+                pitch=voice_request.pitch,
+                audio_encoding=voice_request.audio_encoding
+            )
+            
+            # Convert QueryResponse to dict and add voice data
+            result_dict = rag_result.model_dump()  # Use model_dump() for Pydantic v2
+            result_dict["voice_response"] = voice_result
+            
+            return result_dict
+        
+        # Return the QueryResponse as a dictionary
+        return rag_result.model_dump()  # Use model_dump() for Pydantic v2
+        
+    except Exception as e:
+        logger.error(f"RAG with voice error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# @app.post("/api/v1/rag-with-voice", response_model=Dict[str, Any])
+# async def rag_with_voice(request: Dict[str, Any]):
+#     """Complete RAG pipeline with voice response"""
+#     try:
+#         # 1️⃣ Run the RAG pipeline
+#         rag_result: QueryResponse = await complete_rag_pipeline(request)
+        
+#         # 2️⃣ Decide whether to create TTS output
+#         generate_voice = request.get("generate_voice", False)
+#         if generate_voice and rag_result.response:  # Use dot notation instead of subscript
+#             voice_request = VoiceRequest(
+#                 text=rag_result.response,  # Use dot notation instead of rag_result["response"]
+#                 language_code=request.get("voice_language", "en-US"),
+#                 voice_name=request.get("voice_name", "en-US-Wavenet-D"),
+#                 voice_gender=request.get("voice_gender", "NEUTRAL"),
+#                 speaking_rate=request.get("speaking_rate", 1.0),
+#                 pitch=request.get("pitch", 0.0),
+#                 audio_encoding=request.get("audio_encoding", "MP3")
+#             )
+            
+#             voice_result = await voice_service.text_to_speech(
+#                 text=voice_request.text,
+#                 language_code=voice_request.language_code,
+#                 voice_name=voice_request.voice_name,
+#                 voice_gender=voice_request.voice_gender,
+#                 speaking_rate=voice_request.speaking_rate,
+#                 pitch=voice_request.pitch,
+#                 audio_encoding=voice_request.audio_encoding
+#             )
+            
+#             # Convert QueryResponse to dict and add voice data
+#             result_dict = rag_result.dict()  # or rag_result.model_dump() if using Pydantic v2
+#             result_dict["voice_response"] = voice_result
+            
+#             return result_dict
+        
+#         # Return the QueryResponse as a dictionary
+#         return rag_result.dict()  # or rag_result.model_dump() if using Pydantic v2
+        
+#     except Exception as e:
+#         logger.error(f"RAG with voice error: {e}")
+#         raise HTTPException(status_code=500, detail=str(e))
+
+# @app.post("/api/v1/rag-with-voice", response_model=Dict[str, Any])
+# async def rag_with_voice(request: Dict[str, Any]):
+#     """Complete RAG pipeline with voice response"""
+#     try:
+#         # Process RAG query first
+#         # rag_result = await complete_rag_pipeline(request)
+
+#           # 1️⃣  Run the RAG pipeline
+#         rag_result: QueryResponse = await complete_rag_pipeline(request)
+
+#         # 2️⃣  Decide whether to create TTS output
+#         generate_voice = request.get("generate_voice", False)
+#         if generate_voice and rag_result.response:
+        
+#         # Generate voice response if requested
+#         #if request.get("generate_voice", False) and rag_result.get("response"):
+#             voice_request = VoiceRequest(
+#                 text=rag_result["response"],
+#                 language_code=request.get("voice_language", "en-US"),
+#                 voice_name=request.get("voice_name", "en-US-Wavenet-D"),
+#                 voice_gender=request.get("voice_gender", "NEUTRAL"),
+#                 speaking_rate=request.get("speaking_rate", 1.0),
+#                 pitch=request.get("pitch", 0.0),
+#                 audio_encoding=request.get("audio_encoding", "MP3")
+#             )
+            
+#             voice_result = await voice_service.text_to_speech(
+#                 text=voice_request.text,
+#                 language_code=voice_request.language_code,
+#                 voice_name=voice_request.voice_name,
+#                 voice_gender=voice_request.voice_gender,
+#                 speaking_rate=voice_request.speaking_rate,
+#                 pitch=voice_request.pitch,
+#                 audio_encoding=voice_request.audio_encoding
+#             )
+            
+#             # Add voice data to RAG result
+#             rag_result["voice_response"] = voice_result
+        
+#         return rag_result
+        
+#     except Exception as e:
+#         logger.error(f"RAG with voice error: {e}")
+#         raise HTTPException(status_code=500, detail=str(e))
+
+
+
 # # Add these imports at the top
 # from fastapi import UploadFile, File
 # from fastapi.responses import StreamingResponse
@@ -848,6 +1063,76 @@ async def complete_rag_pipeline(request: Dict[str, Any]):
 #         raise HTTPException(status_code=500, detail=str(e))
 
 
+
+@app.post("/api/v1/rag-with-voice", response_model=Dict[str, Any])
+async def rag_with_voice(request: Dict[str, Any]):
+    """Complete RAG pipeline with automatic voice response"""
+    try:
+        # 1️⃣ Run the RAG pipeline
+        rag_result: QueryResponse = await complete_rag_pipeline(request)
+        
+        # 2️⃣ Generate voice response if requested
+        generate_voice = request.get("generate_voice", False)
+        voice_result = None
+        
+        if generate_voice and rag_result.response:
+            try:
+                voice_result = await voice_service.text_to_speech(
+                    text=rag_result.response,
+                    language_code=request.get("voice_language", "en-US"),
+                    voice_name=voice_service.get_voice_by_language(
+                        request.get("voice_language", "en-US")
+                    ),
+                    voice_gender=request.get("voice_gender", "NEUTRAL"),
+                    speaking_rate=request.get("speaking_rate", 1.0),
+                    pitch=request.get("pitch", 0.0),
+                    audio_encoding=request.get("audio_encoding", "MP3")
+                )
+            except Exception as e:
+                logger.error(f"Voice generation failed: {e}")
+                voice_result = {
+                    "success": False,
+                    "error": f"Voice generation failed: {str(e)}",
+                    "audio_base64": None
+                }
+        
+        # 3️⃣ Prepare response
+        result_dict = rag_result.model_dump()
+        if voice_result:
+            result_dict["voice_response"] = voice_result
+        
+        return result_dict
+        
+    except Exception as e:
+        logger.error(f"RAG with voice error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
+@app.get("/api/v1/test-voice-auth")
+async def test_voice_auth():
+    """Test voice service authentication"""
+    try:
+        # Test if service account works
+        from google.cloud import texttospeech
+        client = texttospeech.TextToSpeechClient()
+        
+        # Try to list voices (doesn't cost anything)
+        voices = client.list_voices()
+        voice_count = len(voices.voices)
+        
+        return {
+            "success": True,
+            "message": "Service account authentication successful",
+            "voice_count": voice_count,
+            "credentials_path": os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "credentials_path": os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        }
 
 
 if __name__ == "__main__":
