@@ -155,3 +155,175 @@
 2025-07-17 21:17:50,307 - app.main - INFO - Shutting down Agentic RAG Assistant API
 2025-07-17 21:18:01,736 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
 2025-07-17 21:18:02,448 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 01:48:41,736 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 01:48:42,607 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 01:52:22,053 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 01:52:22,932 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 02:24:06,103 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 02:24:06,881 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 02:25:30,684 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 02:25:31,488 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 10:54:06,684 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 10:54:07,326 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 10:54:58,519 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 10:54:59,029 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 10:54:59,408 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized successfully
+2025-07-18 10:54:59,421 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 10:56:43,074 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 10:56:45,356 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 10:56:45,441 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 10:56:59,814 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:00:28,090 - app.main - ERROR - RAG with voice error: 'QueryResponse' object has no attribute 'get'
+2025-07-18 11:04:26,635 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:04:27,265 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:04:27,653 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized successfully
+2025-07-18 11:04:27,668 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:04:38,141 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 11:04:57,667 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:04:58,284 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:04:58,670 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized successfully
+2025-07-18 11:04:58,685 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:06:09,066 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:06:11,223 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 11:06:11,318 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 11:06:32,429 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:08:47,003 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:08:47,518 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:08:47,855 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized successfully
+2025-07-18 11:08:47,866 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:09:17,391 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:09:19,553 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 11:09:19,621 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 11:09:36,828 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:18:40,404 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 11:18:51,388 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:18:52,100 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:18:52,579 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized successfully
+2025-07-18 11:18:52,620 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:21:18,745 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:21:19,382 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:21:19,765 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized successfully
+2025-07-18 11:21:19,781 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:22:08,162 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:22:10,507 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 11:22:10,594 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 11:22:28,307 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:24:34,956 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:24:35,595 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:24:35,992 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized successfully
+2025-07-18 11:24:36,007 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:25:12,144 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:25:14,319 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 11:25:14,391 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 11:25:35,299 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:28:23,996 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:28:24,539 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:28:24,570 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 11:28:24,582 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:29:09,843 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:29:12,286 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 11:29:12,368 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 11:29:31,819 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:33:02,661 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:33:04,494 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 11:33:04,564 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 11:33:24,069 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:34:13,095 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:34:14,790 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 11:34:14,862 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 11:34:28,118 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 11:53:16,778 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 11:53:26,302 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:53:26,865 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:53:26,880 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 11:53:26,888 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 11:54:21,151 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:54:21,754 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 11:54:21,788 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 11:54:21,802 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 14:40:50,220 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 14:41:00,196 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 14:41:00,860 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 14:41:00,886 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 14:41:00,900 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 14:44:14,904 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 14:44:23,740 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 14:44:24,392 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 14:44:24,422 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 14:44:24,438 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 15:26:33,933 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 15:27:00,732 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 15:27:01,345 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 15:27:01,376 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 15:27:01,392 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 15:29:55,182 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 15:30:04,458 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 15:30:04,971 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 15:30:04,997 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 15:30:05,011 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 16:25:55,900 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 16:26:08,216 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 16:26:08,980 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 16:26:09,017 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 16:26:09,038 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 16:27:07,773 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 16:27:10,024 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 16:27:10,126 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 16:27:31,324 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 17:03:19,924 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 17:03:30,847 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:03:31,580 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:03:31,616 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 17:03:31,635 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 17:04:00,952 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 17:04:06,679 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 17:04:06,910 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 17:04:23,679 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 17:11:14,256 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:11:15,710 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:11:15,778 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 17:11:15,814 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 17:14:47,364 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:14:48,107 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:14:48,142 - app.voice.google_voice_service - INFO - Google Voice Service initialized with API key
+2025-07-18 17:14:48,162 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 17:24:16,204 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 17:24:27,638 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:24:28,378 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:24:28,779 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized with service account
+2025-07-18 17:24:28,798 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 17:26:40,618 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 17:26:46,657 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 17:26:46,911 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 17:27:03,444 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 17:40:34,339 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 17:40:58,313 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:40:59,122 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 17:40:59,568 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized with service account
+2025-07-18 17:40:59,586 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 17:42:03,244 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 17:42:09,083 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 17:42:09,304 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 17:42:27,599 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 18:01:03,565 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 18:01:17,338 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 18:01:18,082 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 18:01:18,474 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized with service account
+2025-07-18 18:01:18,504 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 18:03:54,064 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 18:04:16,369 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 18:04:17,116 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 18:04:17,491 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized with service account
+2025-07-18 18:04:17,509 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 18:24:33,116 - app.main - INFO - Shutting down Agentic RAG Assistant API
+2025-07-18 18:24:53,774 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 18:24:54,386 - app.retrieval.vector_store - INFO - Loaded FAISS index with 46 vectors
+2025-07-18 18:24:54,694 - app.voice.google_voice_service - INFO - Google Cloud Voice services initialized with service account
+2025-07-18 18:24:54,708 - app.main - INFO - Starting Agentic RAG Assistant API
+2025-07-18 18:26:04,468 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 18:26:06,870 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 18:26:06,940 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 18:26:30,755 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-18 18:29:01,263 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-07-18 18:29:01,330 - app.retrieval.advanced_vector_store - INFO - Loaded vector store with 77 chunks
+2025-07-18 18:29:16,171 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
