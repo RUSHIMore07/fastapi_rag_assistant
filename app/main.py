@@ -1,4 +1,5 @@
 import os
+from turtle import st
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -10,7 +11,7 @@ import base64
 
 from app.models.schemas import (
     QueryRequest, QueryResponse, ImageUpload, DocumentUpload, 
-    HealthCheck, LLMProvider, QueryType, RetrievalContext
+    HealthCheck, LLMProvider, QueryType, RetrievalContext, VoiceRAGRequest
 )
 from app.agents.orchestrator import AgenticOrchestrator
 from app.config.settings import settings
@@ -161,73 +162,6 @@ async def process_image_query(image_upload: ImageUpload):
         logger.error(f"Error processing image query: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-# @app.post("/api/v1/documents/upload")
-# async def upload_document(
-#     file: UploadFile = File(...),
-#     metadata: str = Form("{}")
-# ):
-#     """Upload and process a document"""
-#     try:
-#         logger.info(f"Uploading document: {file.filename}")
-        
-#         # Check file type
-#         file_extension = file.filename.split('.')[-1].lower()
-#         if file_extension not in settings.allowed_file_types:
-#             raise HTTPException(
-#                 status_code=400, 
-#                 detail=f"File type {file_extension} not supported"
-#             )
-        
-#         # Read file content
-#         file_content = await file.read()
-        
-#         # Process document
-#         if file_extension == "pdf":
-#             result = document_processor.process_pdf(file_content)
-#         elif file_extension == "docx":
-#             result = document_processor.process_docx(file_content)
-#         elif file_extension == "txt":
-#             result = document_processor.process_text(file_content)
-#         else:
-#             raise HTTPException(
-#                 status_code=400, 
-#                 detail=f"Processing for {file_extension} not implemented"
-#             )
-        
-#         if not result["success"]:
-#             raise HTTPException(
-#                 status_code=400, 
-#                 detail=f"Failed to process document: {result.get('error', 'Unknown error')}"
-#             )
-        
-#         # Add to vector store
-#         import json
-#         doc_metadata = json.loads(metadata) if metadata != "{}" else {}
-#         doc_metadata.update({
-#             "filename": file.filename,
-#             "file_type": file_extension,
-#             "upload_time": datetime.now().isoformat()
-#         })
-        
-#         await vector_store.add_documents(
-#             [result["text"]], 
-#             [doc_metadata]
-#         )
-        
-#         logger.info(f"Document {file.filename} processed and indexed successfully")
-        
-#         return {
-#             "message": "Document uploaded and processed successfully",
-#             "filename": file.filename,
-#             "file_type": file_extension,
-#             "text_length": len(result["text"]),
-#             "metadata": doc_metadata
-#         }
-        
-#     except Exception as e:
-#         logger.error(f"Error uploading document: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
-
 
 
 
@@ -373,7 +307,6 @@ async def search_documents(query: str, limit: int = 5):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Add these new endpoints to your existing main.py
 
 @app.post("/api/v1/ingest", response_model=Dict[str, Any])
 async def ingest_document(
@@ -389,7 +322,7 @@ async def ingest_document(
         # Create document processor instance
         from app.multi_modal.processors import DocumentProcessor
         doc_processor = DocumentProcessor()
-        
+        text_content = doc_processor.process_pdf(content)
         # Determine file type and extract text
         file_extension = file.filename.split('.')[-1].lower()
         
@@ -530,104 +463,6 @@ async def advanced_search(request: Dict[str, Any]):
         logger.error(f"Advanced search failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-# @app.post("/api/v1/complete-rag", response_model=QueryResponse)
-# async def complete_rag_pipeline(request: Dict[str, Any]):
-#     """Complete RAG pipeline with optional query refinement"""
-#     try:
-#         original_query = request["query"]
-#         use_refinement = request.get("use_refinement", False)
-#         refinement_type = request.get("refinement_type")
-#         search_type = request.get("search_type", "hybrid")
-        
-#         # Step 1: Optional query refinement
-#         if use_refinement:
-#             refinement_request = {
-#                 "query": original_query,
-#                 "context": request.get("context"),
-#                 "refinement_type": refinement_type
-#             }
-            
-#             refinement_result = await refine_query(refinement_request)
-            
-#             # Use refined query or sub-queries
-#             if refinement_result["sub_queries"]:
-#                 search_queries = refinement_result["sub_queries"]
-#             else:
-#                 search_queries = [refinement_result["refined_query"]]
-#         else:
-#             search_queries = [original_query]
-        
-#         # Step 2: Advanced retrieval
-#         all_results = []
-#         for query in search_queries:
-#             search_request = {
-#                 "query": query,
-#                 "search_type": search_type,
-#                 "k": 5
-#             }
-            
-#             search_results = await advanced_search(search_request)
-#             all_results.extend(search_results["results"])
-        
-#         # Step 3: Deduplicate and rank results
-#         unique_results = {}
-#         for result in all_results:
-#             chunk_id = result["metadata"].get("chunk_id", "unknown")
-#             if chunk_id not in unique_results or result["similarity_score"] > unique_results[chunk_id]["similarity_score"]:
-#                 unique_results[chunk_id] = result
-        
-#         # Get top results
-#         top_results = sorted(unique_results.values(), 
-#                            key=lambda x: x["similarity_score"], 
-#                            reverse=True)[:10]
-        
-#         # Step 4: Generate final response
-#         context_text = "\n\n".join([
-#             f"Source: {result['metadata'].get('filename', 'Unknown')}\n{result['content']}" 
-#             for result in top_results
-#         ])
-        
-#         # Use LLM to generate final response
-#         from app.llm_routing.router import LLMRouter
-#         router = LLMRouter()
-        
-#         rag_prompt = f"""
-#         Based on the following context, please provide a comprehensive answer to the user's question.
-
-#         Context:
-#         {context_text}
-
-#         Question: {original_query}
-
-#         Please provide a detailed answer based on the context provided. If the context doesn't contain enough information, please indicate that clearly.
-#         """
-        
-#         llm_response = await router.generate_response(
-#             rag_prompt,
-#             request.get("preferred_llm", "openai")
-#         )
-        
-#         return QueryResponse(
-#             response=llm_response["content"],
-#             model_used=llm_response["model"],
-#             session_id=request.get("session_id", "default"),
-#             context_used=RetrievalContext(
-#                 chunks=[r["content"] for r in top_results],
-#                 sources=[r["metadata"].get("filename", "Unknown") for r in top_results],
-#                 relevance_scores=[r["similarity_score"] for r in top_results]
-#             ),
-#             metadata={
-#                 "original_query": original_query,
-#                 "refined_queries": search_queries if use_refinement else [],
-#                 "search_type": search_type,
-#                 "use_refinement": use_refinement,
-#                 "total_chunks_found": len(top_results)
-#             }
-#         )
-        
-#     except Exception as e:
-#         logger.error(f"Complete RAG pipeline failed: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/v1/complete-rag", response_model=QueryResponse)
 async def complete_rag_pipeline(request: Dict[str, Any]):
@@ -862,208 +697,6 @@ async def rag_with_voice(request: Dict[str, Any]):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# @app.post("/api/v1/rag-with-voice", response_model=Dict[str, Any])
-# async def rag_with_voice(request: Dict[str, Any]):
-#     """Complete RAG pipeline with voice response"""
-#     try:
-#         # 1️⃣ Run the RAG pipeline
-#         rag_result: QueryResponse = await complete_rag_pipeline(request)
-        
-#         # 2️⃣ Decide whether to create TTS output
-#         generate_voice = request.get("generate_voice", False)
-#         if generate_voice and rag_result.response:  # Use dot notation instead of subscript
-#             voice_request = VoiceRequest(
-#                 text=rag_result.response,  # Use dot notation instead of rag_result["response"]
-#                 language_code=request.get("voice_language", "en-US"),
-#                 voice_name=request.get("voice_name", "en-US-Wavenet-D"),
-#                 voice_gender=request.get("voice_gender", "NEUTRAL"),
-#                 speaking_rate=request.get("speaking_rate", 1.0),
-#                 pitch=request.get("pitch", 0.0),
-#                 audio_encoding=request.get("audio_encoding", "MP3")
-#             )
-            
-#             voice_result = await voice_service.text_to_speech(
-#                 text=voice_request.text,
-#                 language_code=voice_request.language_code,
-#                 voice_name=voice_request.voice_name,
-#                 voice_gender=voice_request.voice_gender,
-#                 speaking_rate=voice_request.speaking_rate,
-#                 pitch=voice_request.pitch,
-#                 audio_encoding=voice_request.audio_encoding
-#             )
-            
-#             # Convert QueryResponse to dict and add voice data
-#             result_dict = rag_result.dict()  # or rag_result.model_dump() if using Pydantic v2
-#             result_dict["voice_response"] = voice_result
-            
-#             return result_dict
-        
-#         # Return the QueryResponse as a dictionary
-#         return rag_result.dict()  # or rag_result.model_dump() if using Pydantic v2
-        
-#     except Exception as e:
-#         logger.error(f"RAG with voice error: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
-
-# @app.post("/api/v1/rag-with-voice", response_model=Dict[str, Any])
-# async def rag_with_voice(request: Dict[str, Any]):
-#     """Complete RAG pipeline with voice response"""
-#     try:
-#         # Process RAG query first
-#         # rag_result = await complete_rag_pipeline(request)
-
-#           # 1️⃣  Run the RAG pipeline
-#         rag_result: QueryResponse = await complete_rag_pipeline(request)
-
-#         # 2️⃣  Decide whether to create TTS output
-#         generate_voice = request.get("generate_voice", False)
-#         if generate_voice and rag_result.response:
-        
-#         # Generate voice response if requested
-#         #if request.get("generate_voice", False) and rag_result.get("response"):
-#             voice_request = VoiceRequest(
-#                 text=rag_result["response"],
-#                 language_code=request.get("voice_language", "en-US"),
-#                 voice_name=request.get("voice_name", "en-US-Wavenet-D"),
-#                 voice_gender=request.get("voice_gender", "NEUTRAL"),
-#                 speaking_rate=request.get("speaking_rate", 1.0),
-#                 pitch=request.get("pitch", 0.0),
-#                 audio_encoding=request.get("audio_encoding", "MP3")
-#             )
-            
-#             voice_result = await voice_service.text_to_speech(
-#                 text=voice_request.text,
-#                 language_code=voice_request.language_code,
-#                 voice_name=voice_request.voice_name,
-#                 voice_gender=voice_request.voice_gender,
-#                 speaking_rate=voice_request.speaking_rate,
-#                 pitch=voice_request.pitch,
-#                 audio_encoding=voice_request.audio_encoding
-#             )
-            
-#             # Add voice data to RAG result
-#             rag_result["voice_response"] = voice_result
-        
-#         return rag_result
-        
-#     except Exception as e:
-#         logger.error(f"RAG with voice error: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
-
-
-
-# # Add these imports at the top
-# from fastapi import UploadFile, File
-# from fastapi.responses import StreamingResponse
-# from app.voice.voice_processor import VoiceProcessor
-# import io
-
-# # Initialize voice processor
-# voice_processor = VoiceProcessor()
-
-# @app.post("/api/v1/voice/speech-to-text")
-# async def speech_to_text(audio_file: UploadFile = File(...)):
-#     """Convert uploaded audio to text"""
-#     try:
-#         # Read audio file
-#         audio_data = await audio_file.read()
-        
-#         # Validate audio format
-#         if not voice_processor.validate_audio_format(audio_data):
-#             raise HTTPException(status_code=400, detail="Invalid audio format")
-        
-#         # Preprocess audio
-#         preprocessed_audio = voice_processor.preprocess_audio(audio_data)
-        
-#         # Convert to text
-#         result = await voice_processor.speech_to_text(preprocessed_audio)
-        
-#         if result["success"]:
-#             return {
-#                 "text": result["text"],
-#                 "language": result["language"],
-#                 "confidence": result["confidence"],
-#                 "success": True
-#             }
-#         else:
-#             raise HTTPException(status_code=500, detail=result["error"])
-            
-#     except Exception as e:
-#         logger.error(f"Speech to text API error: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
-
-# @app.post("/api/v1/voice/text-to-speech")
-# async def text_to_speech(request: Dict[str, Any]):
-#     """Convert text to speech"""
-#     try:
-#         text = request.get("text", "")
-#         voice_speed = request.get("voice_speed", 1.0)
-        
-#         if not text:
-#             raise HTTPException(status_code=400, detail="Text is required")
-        
-#         # Convert text to speech
-#         result = await voice_processor.text_to_speech(text, voice_speed)
-        
-#         if result["success"]:
-#             # Return audio as streaming response
-#             return StreamingResponse(
-#                 io.BytesIO(result["audio_data"]),
-#                 media_type="audio/wav",
-#                 headers={
-#                     "Content-Disposition": "attachment; filename=speech.wav",
-#                     "Content-Length": str(len(result["audio_data"]))
-#                 }
-#             )
-#         else:
-#             raise HTTPException(status_code=500, detail=result["error"])
-            
-#     except Exception as e:
-#         logger.error(f"Text to speech API error: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
-
-# @app.post("/api/v1/voice/voice-query")
-# async def voice_query(audio_file: UploadFile = File(...)):
-#     """Process voice query through complete RAG pipeline"""
-#     try:
-#         # Convert speech to text
-#         audio_data = await audio_file.read()
-#         stt_result = await voice_processor.speech_to_text(audio_data)
-        
-#         if not stt_result["success"]:
-#             raise HTTPException(status_code=400, detail="Speech recognition failed")
-        
-#         query_text = stt_result["text"]
-        
-#         # Process through RAG pipeline
-#         rag_request = {
-#             "query": query_text,
-#             "use_refinement": True,
-#             "search_type": "hybrid",
-#             "preferred_llm": "gpt-4"
-#         }
-        
-#         # Call your existing RAG pipeline
-#         rag_response = await complete_rag_pipeline(rag_request)
-        
-#         # Convert response to speech
-#         tts_result = await voice_processor.text_to_speech(rag_response.response)
-        
-#         return {
-#             "query_text": query_text,
-#             "response_text": rag_response.response,
-#             "audio_response": tts_result["audio_data"] if tts_result["success"] else None,
-#             "confidence": stt_result["confidence"],
-#             "model_used": rag_response.model_used,
-#             "success": True
-#         }
-        
-#     except Exception as e:
-#         logger.error(f"Voice query API error: {e}")
-#         raise HTTPException(status_code=500, detail=str(e))
-
-
-
 @app.post("/api/v1/rag-with-voice", response_model=Dict[str, Any])
 async def rag_with_voice(request: Dict[str, Any]):
     """Complete RAG pipeline with automatic voice response"""
@@ -1133,6 +766,92 @@ async def test_voice_auth():
             "error": str(e),
             "credentials_path": os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
         }
+
+
+@app.post("/api/v1/rag-with-voice")
+async def rag_with_voice(req: VoiceRAGRequest):
+    rag = await complete_rag_pipeline(req.model_dump())
+    voice: dict | None = None
+    if req.generate_voice:
+        voice = await voice_service.text_to_speech(
+            text=rag.response,
+            language_code=req.voice_settings.language,
+            voice_name=req.voice_settings.voice_name,
+            voice_gender=req.voice_settings.voice_gender,
+            speaking_rate=req.voice_settings.voice_speed,
+            pitch=req.voice_settings.voice_pitch,
+            audio_encoding="MP3"
+        )
+    return {
+        "response": rag.response,
+        "model_used": rag.model_used,
+        "context_used": rag.context_used,
+        "voice_response": voice,
+    }
+
+
+
+@app.get("/api/v1/documents/stats")
+async def get_document_stats():
+    """Get document statistics and metrics"""
+    try:
+        # Get basic document count
+        docs_response = await list_documents()
+        
+        # Calculate additional statistics
+        total_docs = docs_response.get("document_count", 0)
+        index_info = docs_response.get("index_info", {})
+        total_vectors = index_info.get("total_vectors", 0)
+        
+        # Get recent uploads if available
+        recent_uploads_count = 0
+        if hasattr(st.session_state, 'recent_uploads'):
+            recent_uploads_count = len(st.session_state.recent_uploads)
+        
+        # Calculate storage metrics
+        storage_metrics = {
+            "total_documents": total_docs,
+            "total_vectors": total_vectors,
+            "vector_dimension": index_info.get("dimension", 1536),
+            "index_type": index_info.get("index_type", "FAISS"),
+            "recent_uploads": recent_uploads_count
+        }
+        
+        # Performance metrics (you can expand these based on your needs)
+        performance_metrics = {
+            "avg_query_time": "0.25s",  # You can implement actual tracking
+            "cache_hit_rate": "78%",
+            "search_accuracy": "92%",
+            "embedding_generation_time": "1.2s"
+        }
+        
+        # Category distribution (mock data - implement based on your metadata)
+        category_distribution = {
+            "Research": 45,
+            "Technical": 30,
+            "Business": 15,
+            "Other": 10
+        }
+        
+        return {
+            "success": True,
+            "storage_metrics": storage_metrics,
+            "performance_metrics": performance_metrics,
+            "category_distribution": category_distribution,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting document stats: {e}")
+        return {
+            "success": False,
+            "error": str(e),
+            "storage_metrics": {},
+            "performance_metrics": {},
+            "category_distribution": {}
+        }
+
+
 
 
 if __name__ == "__main__":
